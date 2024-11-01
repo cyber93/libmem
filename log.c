@@ -155,7 +155,7 @@ struct log_ctx *log_init(const char *owner, int dst, int priority, int timestamp
 		l->log_fn = log_to_syslog;
 	else if (dst == LDST_NULL)
 		l->log_fn = log_to_null;
-	else if (dst == LDST_FILE & filepath != NULL)
+	else if ((dst == LDST_FILE) & (filepath != NULL))
 	{
 		l->file = fopen(filepath, "a");
 		l->log_fn = log_to_file;

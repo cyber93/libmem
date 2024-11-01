@@ -55,7 +55,7 @@
  */
 #include <daxctl/libdaxctl.h>
 
-#include <cxltoyaml.h>
+//#include <cxltoyaml.h>
 
 /* log_init()
  * log_free()
@@ -1014,7 +1014,7 @@ void mem_log_set_destination(struct mem_ctx *ctx, int dst, char *filepath)
 		ctx->log->log_fn = log_to_syslog;
 	else if (dst == LDST_NULL)
 		ctx->log->log_fn = log_to_null;
-	else if (dst == LDST_FILE & filepath != NULL)
+	else if ((dst == LDST_FILE) & (filepath != NULL))
 	{
 		ctx->log->file = fopen(filepath, "a");
 		ctx->log->log_fn = log_to_file;
@@ -2016,10 +2016,12 @@ int mem_region_offline_blocks(struct mem_ctx *ctx, struct cxl_region *region)
 		}
 	}
 
-	if (rv == 0)
+	if (rv == 0) {
 		info(ctx, "Offlined all blocks of region %s", cxl_region_get_devname(region));
-	else 
+	}
+	else {
 		err(ctx, "Failed to offline all blocks of region %s", cxl_region_get_devname(region));
+	}
 
 end:
 
@@ -2082,10 +2084,12 @@ int mem_region_online_blocks(struct mem_ctx *ctx, struct cxl_region *region)
 		}
 	}
 
-	if (rv == 0)
+	if (rv == 0) {
 		info(ctx, "Onlined all blocks of region %s", cxl_region_get_devname(region));
-	else 
+	}
+	else {
 		err(ctx, "Failed to online all blocks of region %s", cxl_region_get_devname(region));
+	}
 
 end:
 
